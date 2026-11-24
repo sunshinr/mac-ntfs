@@ -51,8 +51,14 @@ async function copy(text: string): Promise<void> {
           <li>
             <strong>安装 macFUSE 与 ntfs-3g</strong>
             <div class="cmd mono">
-              <code>{{ depsCommand }}</code>
-              <el-button text size="small" :icon="CopyDocument" @click="copy(depsCommand)" />
+              <code translate="no">{{ depsCommand }}</code>
+              <el-button
+                text
+                size="small"
+                :icon="CopyDocument"
+                aria-label="复制安装命令"
+                @click="copy(depsCommand)"
+              />
             </div>
             <p class="note">安装 macFUSE 后需要重启一次。</p>
           </li>
@@ -95,11 +101,12 @@ async function copy(text: string): Promise<void> {
           <li>
             <strong>安装 Homebrew（如未安装）</strong>
             <div class="cmd mono">
-              <code>/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"</code>
+              <code translate="no">/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"</code>
               <el-button
                 text
                 size="small"
                 :icon="CopyDocument"
+                aria-label="复制 Homebrew 安装命令"
                 @click="copy('/bin/bash -c &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)&quot;')"
               />
             </div>
@@ -107,16 +114,28 @@ async function copy(text: string): Promise<void> {
           <li>
             <strong>安装 macFUSE 与 ntfs-3g</strong>
             <div class="cmd mono">
-              <code>{{ depsCommand }}</code>
-              <el-button text size="small" :icon="CopyDocument" @click="copy(depsCommand)" />
+              <code translate="no">{{ depsCommand }}</code>
+              <el-button
+                text
+                size="small"
+                :icon="CopyDocument"
+                aria-label="复制安装命令"
+                @click="copy(depsCommand)"
+              />
             </div>
             <p class="note">路径差异由 brew --prefix 自动处理：Intel 为 /usr/local，Apple 芯片为 /opt/homebrew。</p>
           </li>
           <li>
             <strong>验证命令行挂载（M0 基线）</strong>
             <div class="cmd mono">
-              <code>{{ volumeCheckCommand }}</code>
-              <el-button text size="small" :icon="CopyDocument" @click="copy(volumeCheckCommand)" />
+              <code translate="no">{{ volumeCheckCommand }}</code>
+              <el-button
+                text
+                size="small"
+                :icon="CopyDocument"
+                aria-label="复制验证命令"
+                @click="copy(volumeCheckCommand)"
+              />
             </div>
             <p class="note">也可直接运行仓库中的 scripts/m0-poc.sh 完成一次挂载、写入与卸载。</p>
           </li>
@@ -132,8 +151,14 @@ async function copy(text: string): Promise<void> {
           <li>
             <strong>编译并安装</strong>
             <div class="cmd mono">
-              <code>{{ helperCommand }}</code>
-              <el-button text size="small" :icon="CopyDocument" @click="copy(helperCommand)" />
+              <code translate="no">{{ helperCommand }}</code>
+              <el-button
+                text
+                size="small"
+                :icon="CopyDocument"
+                aria-label="复制助手安装命令"
+                @click="copy(helperCommand)"
+              />
             </div>
             <p class="note">脚本会编译 helper、安装 com.ntfs4mac.helper.plist 并启动 LaunchDaemon，需要开发者证书签名。</p>
           </li>

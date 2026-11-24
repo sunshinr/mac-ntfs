@@ -1,4 +1,5 @@
 :root {
+  color-scheme: light;
   --app-bg: #eef0f4;
   --panel-bg: rgba(255, 255, 255, 0.86);
   --panel-solid: #ffffff;
@@ -161,5 +162,58 @@ h4 {
 /* macOS 隐藏式标题栏需要为红绿灯留出空间 */
 .shell.platform-darwin .titlebar {
   padding-left: 88px;
+}
+
+button,
+.el-button {
+  touch-action: manipulation;
+}
+
+.skip-link {
+  position: fixed;
+  top: 10px;
+  left: 50%;
+  z-index: 4000;
+  transform: translateX(-50%) translateY(-6px);
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--border-strong);
+  background: #fff;
+  color: var(--text-main);
+  font-size: 12px;
+  text-decoration: none;
+  box-shadow: var(--shadow-card);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.skip-link:focus {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+}
+
+/* 抽屉 / 模态内滚动不传递到页面 */
+.el-overlay-dialog,
+.el-drawer__body {
+  overscroll-behavior: contain;
+}
+
+.el-drawer__body {
+  overflow-y: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 

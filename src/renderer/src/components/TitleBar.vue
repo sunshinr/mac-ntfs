@@ -37,7 +37,7 @@ const osLabel = computed(() =>
 <template>
   <header class="titlebar">
     <div class="brand">
-      <div class="logo">NT</div>
+      <div class="logo" aria-hidden="true">NT</div>
       <div class="brand-text">
         <strong>NTFS for Mac</strong>
         <span>{{ osLabel || 'macFUSE · ntfs-3g' }}</span>
@@ -46,17 +46,24 @@ const osLabel = computed(() =>
 
     <div class="actions">
       <button class="status-pill" :class="engineTone" type="button" @click="$emit('guide')">
-        <span class="state-dot" :class="engineTone === 'mock' ? 'warn' : engineTone" />
+        <span class="state-dot" :class="engineTone === 'mock' ? 'warn' : engineTone" aria-hidden="true" />
         {{ engineLabel }}
       </button>
       <el-tooltip content="重新扫描磁盘" placement="bottom">
-        <el-button text circle :icon="Refresh" :loading="refreshing" @click="$emit('refresh')" />
+        <el-button
+          text
+          circle
+          :icon="Refresh"
+          :loading="refreshing"
+          aria-label="重新扫描磁盘"
+          @click="$emit('refresh')"
+        />
       </el-tooltip>
       <el-tooltip content="运行日志" placement="bottom">
-        <el-button text circle :icon="Document" @click="$emit('logs')" />
+        <el-button text circle :icon="Document" aria-label="打开运行日志" @click="$emit('logs')" />
       </el-tooltip>
       <el-tooltip content="设置" placement="bottom">
-        <el-button text circle :icon="Setting" @click="$emit('settings')" />
+        <el-button text circle :icon="Setting" aria-label="打开设置" @click="$emit('settings')" />
       </el-tooltip>
     </div>
   </header>
@@ -147,5 +154,10 @@ const osLabel = computed(() =>
 .status-pill:hover {
   border-color: var(--border-strong);
   background: #fff;
+}
+
+.status-pill:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
 }
 </style>

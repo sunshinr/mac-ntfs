@@ -44,14 +44,18 @@ const pollOptions = [
   >
     <div class="form">
       <section class="group">
-        <h3>挂载行为</h3>
+        <h2>挂载行为</h2>
 
         <div class="item">
           <div class="text">
             <strong>插入后自动挂载</strong>
             <p>检测到新的 NTFS 卷时自动挂载，启动时也会尝试重挂。</p>
           </div>
-          <el-switch :model-value="form.autoMount" @change="update('autoMount', $event === true)" />
+          <el-switch
+            :model-value="form.autoMount"
+            aria-label="插入后自动挂载"
+            @change="update('autoMount', $event === true)"
+          />
         </div>
 
         <div class="item">
@@ -61,6 +65,7 @@ const pollOptions = [
           </div>
           <el-switch
             :model-value="form.readOnlyByDefault"
+            aria-label="默认只读挂载"
             @change="update('readOnlyByDefault', $event === true)"
           />
         </div>
@@ -72,6 +77,7 @@ const pollOptions = [
           </div>
           <el-switch
             :model-value="form.showNonNtfs"
+            aria-label="显示非 NTFS 卷"
             @change="update('showNonNtfs', $event === true)"
           />
         </div>
@@ -83,6 +89,7 @@ const pollOptions = [
           </div>
           <el-switch
             :model-value="form.launchAtLogin"
+            aria-label="登录时启动"
             :disabled="!status?.isMac"
             @change="update('launchAtLogin', $event === true)"
           />
@@ -90,14 +97,18 @@ const pollOptions = [
       </section>
 
       <section class="group">
-        <h3>ntfs-3g 参数</h3>
+        <h2>ntfs-3g 参数</h2>
 
         <div class="item">
           <div class="text">
             <strong>allow_other</strong>
             <p>允许其他用户访问已挂载的卷，默认开启。</p>
           </div>
-          <el-switch :model-value="form.allowOther" @change="update('allowOther', $event === true)" />
+          <el-switch
+            :model-value="form.allowOther"
+            aria-label="允许其他用户访问已挂载卷"
+            @change="update('allowOther', $event === true)"
+          />
         </div>
 
         <div class="item">
@@ -107,6 +118,7 @@ const pollOptions = [
           </div>
           <el-switch
             :model-value="form.autoXattr"
+            aria-label="使用扩展属性保存元数据"
             @change="update('autoXattr', $event === true)"
           />
         </div>
@@ -115,6 +127,7 @@ const pollOptions = [
           <label>附加挂载参数</label>
           <el-input
             v-model="form.extraOptions"
+            aria-label="附加挂载参数"
             placeholder="例如 uid=501,gid=20,umask=022"
             @change="update('extraOptions', form.extraOptions)"
           />
@@ -123,11 +136,12 @@ const pollOptions = [
       </section>
 
       <section class="group">
-        <h3>磁盘监听</h3>
+        <h2>磁盘监听</h2>
         <div class="field">
           <label>轮询间隔</label>
           <el-select
             :model-value="form.pollIntervalMs"
+            aria-label="磁盘轮询间隔"
             style="width: 100%"
             @change="update('pollIntervalMs', Number($event))"
           >
@@ -152,7 +166,7 @@ const pollOptions = [
   padding-bottom: 24px;
 }
 
-.group h3 {
+.group h2 {
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.04em;

@@ -34,7 +34,7 @@ function dotClass(level: CheckLevel): string {
 
     <ul v-if="report" class="checks">
       <li v-for="check in report.checks" :key="check.id">
-        <span class="state-dot" :class="dotClass(check.level)" />
+        <span class="state-dot" :class="dotClass(check.level)" aria-hidden="true" />
         <div class="body">
           <div class="title">
             <strong>{{ check.title }}</strong>

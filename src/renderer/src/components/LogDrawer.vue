@@ -92,12 +92,13 @@ async function copyAll(): Promise<void> {
           <el-input
             v-model="keyword"
             size="small"
-            placeholder="搜索日志"
+            placeholder="搜索日志…"
+            aria-label="搜索日志"
             :prefix-icon="Search"
             clearable
             class="search"
           />
-          <el-radio-group v-model="level" size="small">
+          <el-radio-group v-model="level" size="small" aria-label="日志级别">
             <el-radio-button value="all">全部</el-radio-button>
             <el-radio-button value="info">信息</el-radio-button>
             <el-radio-button value="warn">警告</el-radio-button>
@@ -192,6 +193,7 @@ async function copyAll(): Promise<void> {
 .time {
   color: var(--text-faint);
   font-size: 11px;
+  font-variant-numeric: tabular-nums;
 }
 
 .lvl {

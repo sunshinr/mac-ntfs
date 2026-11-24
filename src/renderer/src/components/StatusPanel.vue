@@ -91,7 +91,7 @@ const rows = computed<Row[]>(() => {
       <li v-for="row in rows" :key="row.label">
         <span class="label">{{ row.label }}</span>
         <span class="value" :class="row.tone" :title="row.hint ?? row.value">{{ row.value }}</span>
-        <span class="state-dot" :class="row.tone === 'idle' ? '' : row.tone" />
+        <span class="state-dot" :class="row.tone === 'idle' ? '' : row.tone" aria-hidden="true" />
       </li>
     </ul>
 
@@ -112,7 +112,7 @@ const rows = computed<Row[]>(() => {
     </div>
 
     <p v-if="!issues.length && status && !status.mock" class="all-good">
-      <span class="state-dot ok" />
+      <span class="state-dot ok" aria-hidden="true" />
       环境检查通过，可以开始挂载 NTFS 卷
     </p>
   </section>

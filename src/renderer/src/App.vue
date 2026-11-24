@@ -132,6 +132,8 @@ async function acceptDisclaimer(): Promise<void> {
 
     <div class="scroll">
       <div class="page">
+        <a class="skip-link" href="#main">跳到主要内容</a>
+        <main id="main" tabindex="-1" class="page-main">
         <section class="hero">
           <div class="hero-text">
             <h1>NTFS 卷</h1>
@@ -142,21 +144,25 @@ async function acceptDisclaimer(): Promise<void> {
             </p>
           </div>
           <div class="hero-controls">
-            <label class="switch-group">
+            <span class="switch-group">
               <el-switch
                 :model-value="settings.autoMount"
+                aria-label="插入后自动挂载"
                 @change="toggleSetting('autoMount', $event)"
               />
               <span>插入后自动挂载</span>
-            </label>
-            <label class="switch-group">
+            </span>
+            <span class="switch-group">
               <el-switch
                 :model-value="settings.showNonNtfs"
+                aria-label="显示非 NTFS 卷"
                 @change="toggleSetting('showNonNtfs', $event)"
               />
               <span>显示非 NTFS</span>
-            </label>
-            <el-button :icon="Refresh" :loading="refreshing" @click="refresh">重新扫描</el-button>
+            </span>
+            <el-button :icon="Refresh" :loading="refreshing" aria-label="重新扫描磁盘" @click="refresh">
+              重新扫描
+            </el-button>
           </div>
         </section>
 
@@ -188,10 +194,10 @@ async function acceptDisclaimer(): Promise<void> {
             </div>
 
             <div v-else class="empty">
-              <div class="empty-icon">
+              <div class="empty-icon" aria-hidden="true">
                 <el-icon :size="26"><Coin /></el-icon>
               </div>
-              <h3>未发现 NTFS 卷</h3>
+              <h2>未发现 NTFS 卷</h2>
               <p>
                 连接 NTFS 磁盘后会自动出现在这里。若已插入，请尝试重新扫描，或打开“显示非 NTFS”确认分区是否被识别。
               </p>
@@ -199,7 +205,7 @@ async function acceptDisclaimer(): Promise<void> {
             </div>
 
             <div class="tips">
-              <el-icon :size="16"><InfoFilled /></el-icon>
+              <el-icon :size="16" aria-hidden="true"><InfoFilled /></el-icon>
               <div>
                 <strong>写入前请注意</strong>
                 <p>
@@ -220,6 +226,7 @@ async function acceptDisclaimer(): Promise<void> {
             <DiagnosticsPanel :report="diagnostics" :running="diagnosing" @run="runDiagnosis" />
           </aside>
         </div>
+        </main>
 
         <footer class="foot">
           <span>v{{ appVersion }} · macFUSE + ntfs-3g</span>
@@ -258,12 +265,12 @@ async function acceptDisclaimer(): Promise<void> {
 
     <DisclaimerDialog :open="showDisclaimer" @accept="acceptDisclaimer" @guide="openGuide('kext')" />
 
-    <div v-if="booting" class="overlay">
-      <div class="spinner" />
+    <div v-if="booting" class="overlay" role="status" aria-live="polite">
+      <div class="spinner" aria-hidden="true" />
       <p>正在连接主进程并检测环境…</p>
     </div>
 
-    <div v-else-if="fatal" class="overlay">
+    <div v-else-if="fatal" class="overlay" role="alert">
       <h2>启动失败</h2>
       <p>{{ fatal }}</p>
       <el-button @click="refresh">重试</el-button>
@@ -295,6 +302,17 @@ async function acceptDisclaimer(): Promise<void> {
   display: flex;
   flex-direction: column;
   gap: 16px;
+}
+
+.page-main {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+}
+
+.page-main:focus {
+  outline: none;
 }
 
 .hero {

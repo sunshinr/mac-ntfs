@@ -39,12 +39,12 @@ const usedPercent = computed(() => {
 <template>
   <article class="card" :class="{ mounted: volume.mounted, busy }">
     <div class="card-head">
-      <div class="icon" :class="stateTone">
+      <div class="icon" :class="stateTone" aria-hidden="true">
         <el-icon :size="19"><Coin /></el-icon>
       </div>
       <div class="titles">
         <div class="name-row">
-          <h3 :title="volume.name">{{ volume.name }}</h3>
+          <h2 :title="volume.name">{{ volume.name }}</h2>
           <span class="state" :class="stateTone">{{ stateLabel }}</span>
         </div>
         <p class="sub">
@@ -78,16 +78,34 @@ const usedPercent = computed(() => {
     </div>
 
     <div class="actions">
-      <template v-if="!volume.mounted">
+      <template v-if="!volume.isNTFS">
+        <span class="non-ntfs">仅展示，不提供挂载</span>
+        <el-button
+          v-if="volume.mounted && volume.mountPoint"
+          :icon="FolderOpened"
+          :disabled="busy"
+          :aria-label="`在访达中显示 ${volume.name}`"
+          @click="$emit('reveal', volume.mountPoint)"
+        >
+          访达
+        </el-button>
+      </template>
+      <template v-else-if="!volume.mounted">
         <el-button
           type="primary"
           :loading="busy"
           :disabled="!engineReady"
+          :aria-label="`挂载 ${volume.name}`"
           @click="$emit('mount', volume.id)"
         >
           挂载
         </el-button>
-        <el-button text :disabled="busy || !engineReady" @click="$emit('mount-readonly', volume.id)">
+        <el-button
+          text
+          :disabled="busy || !engineReady"
+          :aria-label="`以只读方式挂载 ${volume.name}`"
+          @click="$emit('mount-readonly', volume.id)"
+        >
           只读挂载
         </el-button>
       </template>
@@ -96,6 +114,7 @@ const usedPercent = computed(() => {
           v-if="volume.mountPoint"
           :icon="FolderOpened"
           :disabled="busy"
+          :aria-label="`在访达中显示 ${volume.name}`"
           @click="$emit('reveal', volume.mountPoint)"
         >
           访达
@@ -106,11 +125,19 @@ const usedPercent = computed(() => {
           plain
           :loading="busy"
           :disabled="!engineReady"
+          :aria-label="`将 ${volume.name} 重新挂载为可写`"
           @click="$emit('mount', volume.id)"
         >
           重挂为可写
         </el-button>
-        <el-button :icon="SwitchButton" type="danger" plain :loading="busy" @click="$emit('unmount', volume.id)">
+        <el-button
+          :icon="SwitchButton"
+          type="danger"
+          plain
+          :loading="busy"
+          :aria-label="`卸载 ${volume.name}`"
+          @click="$emit('unmount', volume.id)"
+        >
           卸载
         </el-button>
       </template>
@@ -188,7 +215,7 @@ const usedPercent = computed(() => {
   min-width: 0;
 }
 
-.name-row h3 {
+.name-row h2 {
   font-size: 15px;
   font-weight: 600;
   letter-spacing: -0.01em;
@@ -253,6 +280,7 @@ const usedPercent = computed(() => {
   gap: 10px;
   font-size: 11.5px;
   color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
 }
 
 .bar {
@@ -298,5 +326,10 @@ const usedPercent = computed(() => {
 
 .actions :deep(.el-button + .el-button) {
   margin-left: 0;
+}
+
+.non-ntfs {
+  font-size: 11.5px;
+  color: var(--text-faint);
 }
 </style>
