@@ -1,0 +1,165 @@
+:root {
+  --app-bg: #eef0f4;
+  --panel-bg: rgba(255, 255, 255, 0.86);
+  --panel-solid: #ffffff;
+  --border-soft: rgba(17, 24, 39, 0.08);
+  --border-strong: rgba(17, 24, 39, 0.14);
+  --text-main: #17191c;
+  --text-muted: #6b7280;
+  --text-faint: #9aa1ac;
+  --brand: #2f6fed;
+  --brand-soft: rgba(47, 111, 237, 0.1);
+  --ok: #1a7f45;
+  --ok-soft: rgba(26, 127, 69, 0.1);
+  --warn: #b45309;
+  --warn-soft: rgba(180, 83, 9, 0.1);
+  --danger: #d13c3c;
+  --danger-soft: rgba(209, 60, 60, 0.1);
+  --radius-lg: 18px;
+  --radius-md: 12px;
+  --shadow-card: 0 1px 2px rgba(17, 24, 39, 0.04), 0 10px 30px rgba(17, 24, 39, 0.06);
+  --el-color-primary: #2f6fed;
+  --el-border-radius-base: 8px;
+  --el-font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'PingFang SC', 'Hiragino Sans GB',
+    'Microsoft YaHei', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: var(--el-font-family);
+  color: var(--text-main);
+  background: var(--app-bg);
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+  user-select: none;
+}
+
+p,
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(17, 24, 39, 0.18);
+  border: 3px solid transparent;
+  background-clip: content-box;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(17, 24, 39, 0.3);
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.panel {
+  background: var(--panel-solid);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 1px 2px rgba(17, 24, 39, 0.03);
+  padding: 18px 18px 14px;
+}
+
+.panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.panel-head h2 {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 22px;
+  padding: 0 9px;
+  border-radius: 999px;
+  background: rgba(17, 24, 39, 0.05);
+  color: var(--text-muted);
+  font-size: 11.5px;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.state-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--text-faint);
+  flex: none;
+}
+
+.state-dot.ok {
+  background: var(--ok);
+  box-shadow: 0 0 0 3px var(--ok-soft);
+}
+
+.state-dot.warn {
+  background: var(--warn);
+  box-shadow: 0 0 0 3px var(--warn-soft);
+}
+
+.state-dot.danger {
+  background: var(--danger);
+  box-shadow: 0 0 0 3px var(--danger-soft);
+}
+
+.mono {
+  font-family: 'SF Mono', ui-monospace, 'JetBrains Mono', Menlo, Consolas, monospace;
+}
+
+.muted {
+  color: var(--text-muted);
+}
+
+.selectable {
+  user-select: text;
+}
+
+.el-button {
+  font-weight: 500;
+}
+
+.el-switch__label {
+  font-size: 12.5px;
+  color: var(--text-muted);
+}
+
+.el-drawer {
+  border-radius: 18px 18px 0 0;
+}
+
+/* macOS 隐藏式标题栏需要为红绿灯留出空间 */
+.shell.platform-darwin .titlebar {
+  padding-left: 88px;
+}
+

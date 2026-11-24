@@ -1,0 +1,41 @@
+{
+  "name": "ntfs-for-mac",
+  "version": "0.1.0",
+  "private": true,
+  "description": "基于 macFUSE + ntfs-3g 的 NTFS 读写管理工具",
+  "main": "./out/main/index.js",
+  "author": "sunshinr",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "electron-vite dev",
+    "preview": "electron-vite preview",
+    "build": "npm run typecheck && electron-vite build",
+    "typecheck": "npm run typecheck:node && npm run typecheck:web",
+    "typecheck:node": "tsc --noEmit -p tsconfig.node.json --composite false",
+    "typecheck:web": "vue-tsc --noEmit -p tsconfig.web.json --composite false",
+    "dist:mac": "npm run build && electron-builder --mac",
+    "helper:build": "bash scripts/build-helper.sh",
+    "poc": "bash scripts/m0-poc.sh",
+    "verify": "bash scripts/verify-backend.sh",
+    "cli": "tsx src/cli/index.ts"
+  },
+  "dependencies": {
+    "@element-plus/icons-vue": "^2.3.2",
+    "element-plus": "^2.14.8",
+    "vue": "^3.5.46"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.1",
+    "@vitejs/plugin-vue": "^6.0.11",
+    "electron": "^45.4.1",
+    "electron-builder": "^26.18.0",
+    "electron-vite": "^6.0.0",
+    "tsx": "^4.20.6",
+    "typescript": "~5.9.3",
+    "vite": "^7.3.0",
+    "vue-tsc": "^3.3.14"
+  }
+}

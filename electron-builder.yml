@@ -1,0 +1,49 @@
+appId: com.ntfs4mac.app
+productName: NTFS for Mac
+copyright: Copyright © 2026 sunshinr
+
+directories:
+  output: release
+  buildResources: build
+
+files:
+  - out/**/*
+  - package.json
+  - '!**/*.map'
+
+extraResources:
+  - from: resources/bin
+    to: bin
+
+asar: true
+npmRebuild: false
+
+mac:
+  category: public.app-category.utilities
+  target:
+    - target: dmg
+      arch:
+        - arm64
+        - x64
+    - target: zip
+      arch:
+        - arm64
+        - x64
+  hardenedRuntime: true
+  gatekeeperAssess: false
+  entitlements: build/entitlements.mac.plist
+  entitlementsInherit: build/entitlements.mac.plist
+  extendInfo:
+    NSRemovableVolumesUsageDescription: NTFS for Mac 需要访问外接磁盘以挂载 NTFS 卷。
+    NSDesktopFolderUsageDescription: NTFS for Mac 需要在桌面显示已挂载的卷。
+    LSUIElement: false
+
+dmg:
+  title: NTFS for Mac
+  contents:
+    - x: 140
+      y: 200
+    - x: 400
+      y: 200
+      type: link
+      path: /Applications

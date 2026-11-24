@@ -1,0 +1,16 @@
+node_modules/
+out/
+dist/
+release/
+.DS_Store
+*.log
+logs/
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.tsbuildinfo
+resources/bin/*
+!resources/bin/README.md
+helper/build/
+.env
+.env.local
